@@ -1,0 +1,57 @@
+//=================Abstract Factory Design Pattern===================
+
+1)"Abstract Factory provides an interface for creating families of related or dependent objects without specifying their concrete classes."
+2)"In Factory we were creating one product , but in Abstract Factory ..we are creating family of products"
+3)If Factory = single shop
+  Abstract Factory = shopping mall (multiple shops)
+=============================================================================================
+1)  4 Main Components
+------------------
+ a)Abstract Product A (Chair)
+ b)Abstract Product B (Sofa)
+ c)Concrete Products (ModernChair, VictorianChair…)
+ d)Abstract Factory (FurnitureFactory)
+ e)Concrete Factories (ModernFactory, VictorianFactory)
+ 
+ 
+2) How to THINK: “This is Abstract Factory”
+  Ask these questions:
+  Are there multiple products?
+  Are they related or must work together?
+  Are there variants/themes/platforms?
+  Does client want to switch entire set at once?
+   If YES → Abstract Factory
+  
+  
+3)
+                      AbstractFactory
+                          |
+        ---------------------------------
+        |                               |
+  ModernFactory                  VictorianFactory
+        |                               |
+   ------------                    -------------
+   |          |                    |           |
+ModernChair  ModernSofa     VictorianChair  VictorianSofa
+
+This is exactly a tree structure
+Root → Abstract Factory
+Internal nodes → Concrete Factories
+Leaves → Concrete Products
+
+4)Composite verbs:
+Add
+Remove
+Traverse
+Operate
+Process
+
+Abstract Factory verbs:
+Create 
+Produce
+Instantiate
+Select variant
+
+If your brain says “run something on all nodes” → Composite
+If your brain says “choose one version/style/platform” → Abstract Factory
+
