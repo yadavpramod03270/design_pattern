@@ -1,0 +1,183 @@
+//=======================================================Iterator  design Patterns =======================================================
+/*
+1)"Iterator provides a way to access elements of a collection sequentially without exposing its internal structure."
+"Iterator =An object that moves over elements one by one without exposing internal structure."
+
+2)You can traverse:
+Array
+Vector
+Tree
+Graph
+Custom container
+But you don’t know how it is internally stored.
+
+3)Why do we need it?
+Imagine:
+vector<int> v = {1,2,3,4};
+
+You can loop like this:
+for(int i = 0; i < v.size(); i++)
+
+But what if tomorrow:
+Internally it's changed to list
+Or to a tree
+Or to a custom data structure
+Your loop logic breaks.
+
+Iterator solves this by saying:
+"Don’t touch my internal storage. Just ask me for next element."
+
+4)Real World Analogy 
+
+Think about a TV Remote
+You: Press next channel,Press previous channel.
+You: Don’t know how channels are stored,Don’t know frequency mapping,Don’t know internal logic
+
+You just say: Next()
+That remote = Iterator
+TV channel list = Collection
+
+5)Structure of Iterator Pattern
+It has 4 components:
+
+a)Iterator Interface
+b)Concrete Iterator
+c)Aggregate Interface
+4)Concrete Aggregat
+
+6)When Should You Use Iterator?
+Use Iterator when:
+
+a)You want to traverse without exposing internal structure
+b)You want multiple traversal strategies (forward, backward)
+c)You want uniform way to iterate over different containers
+d)You are building a custom container
+
+7)When NOT to Use It
+
+a)If STL iterators already solve your problem
+b)If traversal is very simple and container is fixed
+
+In C++, STL already uses iterator pattern internally.
+So in real life:  You mostly implement this pattern when building your own container.
+
+8)How to Recognize You Need It
+Ask yourself:
+
+a)Am I exposing internal vector/list directly?
+b)Does client code know about my internal storage?
+c)Will storage type change in future?
+d)Do I need different traversal ways?
+
+If yes ->Iterator pattern candidate.
+*/
+/*
+1)scenario:
+
+A Music Playlist App
+You have a playlist of songs.
+User can traverse songs one by one using an iterator.
+User does NOT know how songs are stored internally.
+
+2)Problem Statement:
+Playlist stores songs internally.
+User should traverse songs without knowing:
+Is it vector?
+Is it array?
+Is it list?
+Playlist should provide an iterator.
+Client only talks to Iterator interface.
+
+3)Structure
+We’ll create:
+Iterator → traversal interface
+Container → aggregate interface
+Playlist → concrete container
+PlaylistIterator → concrete iterator
+*/
+
+=================Order and flow of iterator design pattern=======================
+Here is the clean correct order:
+
+Step 1 — Create Iterator Interface
+Defines HOW to move.
+Iterator
+    hasNext()
+    next()
+
+Step 2 — Create Container Interface
+Defines WHO gives iterator.
+Container
+    createIterator()
+
+Step 3 — Create Concrete Container
+Stores actual data
+Implements createIterator()
+
+Step 4 — Create Concrete Iterator
+Implements Iterator interface
+
+Keeps:
+pointer to container
+current position
+
+Step 5 — Client Code
+Client:
+Container → get Iterator → traverse
+Client never touches internal data.
+
+Simplified Mental Model
+Think like this:
+
+Container = House
+Iterator = Person walking inside house
+Container only says:
+“I can give you a walker.”
+Iterator says:
+“I know how to walk.”
+That’s it.
+*/
+
+/*, we can define linking this way also instead of define it outside the class 
+
+class Numbercollection1 : public Container1 {
+    vector<int> v;
+public:
+    Numbercollection1(vector<int>& v1) : v(v1) {}
+
+    vector<int>& getNumbers() {
+        return v;
+    }
+
+    Iterator1* createIterator() override {
+        return new NumberIterator1(this);
+    }
+};
+
+
+So Why Is Outside More Common
+Because in real systems:
+You separate interface (.h) and implementation (.cpp)
+It reduces compile dependencies
+Improves readability
+Follows industry standard structure
+Especially in large C++ projects.
+
+Important Concept
+Inside class -> function is automatically inline candidate.
+Outside class -> normal function definition.
+That’s the only technical difference.
+*/
+
+/*Your comments show that you clearly get:
+Iterator1-> defines traversal behavior
+Container1-> forces every container to provide an iterator
+Numbercollection1-> stores data
+NumberIterator1-> moves over that data using index
+createIterator()-> factory method for creating iterator
+That’s conceptually solid.
+Only 2 tiny refinements in understanding:
+The iterator doesn’t “store data” — it accesses data inside the collection.
+Container doesn’t need an iterator in real life — but in this pattern, we enforce it to decouple traversal.*/
+
+
