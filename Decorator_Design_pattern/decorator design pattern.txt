@@ -1,0 +1,51 @@
+//--------------------------decorator design pattern----------------
+/*
+1)"Decorator adds new behavior to an object dynamically, without modifying the original class."
+
+2)Coffee Shop
+Base coffee: PlainCoffee
+Add milk
+Add sugar
+Add cream
+You can combine them in any order, any number, at runtime.
+
+You don’t create:
+MilkSugarCoffee
+MilkCreamCoffee
+MilkSugarCreamCoffee
+Instead, you wrap the coffee.
+This is Decorator.
+=========================================================================================================
+1)
+WHY Decorator exists:
+Without Decorator:
+class explosion
+violates Open/Closed Principle
+hard to extend
+
+Decorator:
+add behavior without modifying existing code
+runtime flexibility
+
+
+2)Recall the hierarchy:
+Coffee           // interface (abstract base)
+   ↑
+CoffeeDecorator  // abstract wrapper
+   ↑
+Milk, Sugar      // concrete decorators
+
+
+And usage:
+Coffee* coffee = new Milk(new SimpleCoffee());
+
+3)"Decorator enhances behavior, while Proxy controls access to the object.”
+
+4)When NOT to use Decorator:->
+Too many tiny objects (performance sensitive)
+Behavior is fixed at compile time
+Simple inheritance is sufficient
+
+5)Decorator only works because of runtime polymorphism.
+6)Decorator is about changing behavior through base-class pointers.
+That is impossible without overriding virtual functions.
