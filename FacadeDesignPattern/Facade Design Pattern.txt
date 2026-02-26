@@ -1,0 +1,61 @@
+//===============================Facade Design Pattern===================
+/*
+1)Facade provides a simple interface to a complex system,Hide complexity behind one easy entry point.
+“Facade pattern provides a single simplified interface to a complex subsystem without changing its internal structure.”
+---------------------------------------------------------------------
+2)Imagine a system with many classes:
+
+Engine
+FuelPump
+Ignition
+Battery
+CoolingSystem
+To start a car, client code must do:
+
+battery.on();
+fuelPump.start();
+ignition.fire();
+engine.start();
+coolingSystem.activate();
+
+
+Client must:
+a)Know order
+b)Know all objects
+c)Handle complexity
+---------------------------------------------------------------------
+3)Client sees one function
+a)Subsystem hidden
+b)Order guaranteed
+---------------------------------------------------------------------
+
+4)Use Facade when:
+
+a)System is complex
+b)Client should not know internal details
+c)You want clean API
+d)You want to reduce coupling
+e)You integrate legacy code
+---------------------------------------------------------------------
+5)When reading a problem, ask:--->
+a)“Is client forced to interact with many classes?”
+b)“Is there a common use-case that always calls multiple steps?”
+c)“Can I hide this workflow behind one method?”
+---------------------------------------------------------------------
+6)Look for phrases like:
+a)“Simplify interface”
+b)“Hide internal complexity”
+c)“Provide easy API”
+d)“Client should not depend on subsystem”
+e)“Legacy system is hard to use”
+
+These scream Facade.
+---------------------------------------------------------------------
+7)
+When you see a problem, ask:
+“Client is forced to deal with many classes?”
+“There is a common workflow?”
+“Can I hide this behind one method?”
+If YES to all three → Facade.
+---------------------------------------------------------------------
+*/
