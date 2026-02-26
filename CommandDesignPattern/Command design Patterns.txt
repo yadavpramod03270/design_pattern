@@ -1,0 +1,65 @@
+//=======================================================Command design Patterns ==========================================================
+/*
+1)Command is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request.
+This transformation lets you pass requests as a method arguments, delay or queue a request’s execution, and support undoable operations.
+
+2)One-line definition:
+Command pattern turns a request into an object.
+That’s it.
+Instead of directly calling:
+light.turnOn();
+You wrap it inside an object:
+
+Command* cmd = new TurnOnLightCommand(light);
+cmd->execute();
+Now the request itself becomes an object.
+
+3)Why Is That Powerful?
+Because once a request becomes an object, you can:
+Store it
+Queue it
+Log it
+Undo it
+Redo it
+Send it over network
+Execute it later
+That’s the real magic.
+
+4)Real World Analogy
+In a restaurant, the waiter writes your order on paper and gives it to the chef.
+The paper acts as a command that contains all instructions.
+The chef executes the order without talking directly to the customer. 
+
+5) Structure of Command Pattern
+It has 4 parts:
+Command interface
+Concrete Command
+Receiver
+Invoker
+(Client wires everything)
+
+6)Why command pattern?
+
+Answer:
+Decouples sender from receiver
+Encapsulates request as object
+Enables undo/redo
+Enables queuing/logging
+Follows Open/Closed Principle
+That’s strong answer.
+
+7)The Sender class (aka invoker) is responsible for initiating requests.
+This class must have a field for storing a reference to a command object. 
+The sender triggers that command instead of sending the request directly to the receiver.
+Note that the sender isn’t responsible for creating the command object.
+Usually, it gets a pre-created command from the client via the constructor.
+
+8)Structure of the Code
+Mapping Real World → Pattern
+Real World  -> 	Pattern Role
+Customer    ->	Client
+Waiter      ->	Invoker
+Paper Order ->	Command
+Chef        ->	Receiver
+Cook Meal	->    execute()
+*/
