@@ -1,0 +1,49 @@
+//**************************Proxy Design Pattern***************************************************
+
+Both Proxy and Adapter may look identical structurally and both follow DIP. 
+The difference is intent: Proxy introduces an optional control layer over an already compatible object,
+while Adapter is required to translate an incompatible interface so the system can function.”
+Final crystal-clear comparison 
+-----------------------------------
+Proxy:->
+Extra class exists for control
+Real object is already usable
+Removing proxy → system still works
+Interface does not change
+Intent: guard / delay / monitor
+
+Proxy = optional middleman
+-----------------------------------
+Adapter:->
+
+Extra class exists for compatibility
+Real object is NOT usable directly
+Removing adapter → system breaks
+Interface is translated
+Intent: make incompatible things work
+Adapter = mandatory translator
+One-line rule-->
+Proxy protects something usable.
+Adapter fixes something unusable.
+
+-----------------------------------
+• We recognize patterns by intent, not structure
+• Proxy has an extra class that stands in for the real object
+• The system can work even without the proxy
+• Adapter also has an extra class
+• But without adapter, the system cannot work because it’s needed to make things compatible
+
+Another version:-->
+
+Adapter manipulates / translates calls so that an existing incompatible class can work with the client’s expected abstraction.
+
+The adapter does not fix the abstraction —it bridges the mismatch between:
+1)what the client expects
+2)what the adaptee provides
+
+--------------------------------------------------------------------------------------------------
+Note::
+“Both Proxy and Adapter may look identical structurally and both follow DIP. The difference is intent:
+Proxy introduces an optional control layer over an already compatible object,
+while Adapter is required to translate an incompatible interface so the system can function.” */
+
