@@ -1,0 +1,126 @@
+//=======================================================State design Patterns ==========================================================
+
+/*
+1)"State pattern allows an object to change its behavior when its internal state changes."
+Meaning:Same object, Different behavior, Based on current state.
+
+2)Imagine a mobile phone:
+
+When locked -> pressing screen does nothing
+When unlocked --> pressing screen opens apps
+Same phone.
+Same button.
+Different behavior.
+
+Why?
+Because state changed.
+
+3)A Match can be:
+NotStarted
+Live
+InningsBreak
+Finished
+
+Now think:
+If user calls:
+match.updateScore();
+Behavior depends on state:
+NotStarted -> “Match hasn’t started”
+
+Live -> Update score
+Finished -> “Match is over”
+Same method. Different behavior.
+That’s State pattern.
+
+4)Why Not Use if-else?
+Without State pattern:
+
+if(state == NOT_STARTED) { ... }
+else if(state == LIVE) { ... }
+else if(state == FINISHED) { ... }
+
+Problems:
+Big if-else blocks
+Hard to extend
+Violates OCP
+Messy logic everywhere
+State pattern removes this.
+
+5)Structure:
+
+It has:
+State interface
+Concrete States
+Context (main object)
+
+
+6)Roles Explained
+State Interface=>Defines behavior:  handle()
+
+Concrete States=>Implement behavior differently: 
+Context:
+Holds current state
+Delegates work to state
+Can change state dynamically
+
+7)How To Recognize State Pattern
+
+Ask yourself:
+Does object behavior change based on internal state?
+Are there many if-else based on state?
+Is state logic scattered?
+Do states transition from one to another?
+If YES => State pattern candidate.
+
+8)Real Applications=>
+
+ATM machine states
+Order lifecycle
+Traffic light
+Game character modes
+Media player states
+TCP connection states
+*/
+//=================================================================================================================================================
+//=======================Traffic Light System=========================
+
+STATEMENT: Light behavior changes based on current state.
+           Transitions happen automatically.
+           No big if-else mess
+           
+Problem
+Traffic light has 3 states:
+Red
+Green
+Yellow
+Same method:
+change()
+
+
+But behavior depends on current state    
+
+
+======================================================================================================
+Think about a music player app.
+
+It can be in:
+Playing
+Paused
+Stopped
+Now here’s the important part:
+If you press Play button:
+If Stopped -> start playing
+If Paused -> resume
+If Playing -> maybe ignore
+If you press Stop button:
+If Playing -> stop
+If Paused -> stop
+If Stopped -> ignore
+Behavior depends on internal state.
+Perfect for State pattern.
+
+Structure:
+Context -> MusicPlayer
+State interface -> PlayerState
+Concrete States -> PlayingState, PausedState, StoppedState
+       
