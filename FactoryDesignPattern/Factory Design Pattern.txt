@@ -1,0 +1,52 @@
+//=================Factory Design Pattern===================
+
+1)" Factory Pattern defines an interface for creating an object, but lets subclasses (or a factory class) decide which class to instantiate."
+2)"Factory Pattern centralizes object creation and hides the exact class being instantiated from the client."
+3) example; 
+   a)Client says: “I want a Vehicle”
+   b)Factory decides: “Car or Bike or Truck?”
+   c)Client never uses new Car() directly.
+   
+4)What if Factory Not Usage:
+   a)Tight coupling to concrete classes
+   b)Every new type = modify client code
+   c)Violates Open–Closed Principle
+   d)Messy, untestable, fragile
+   
+5)With Factory (Good design)
+  Benefits:
+   a)One place for creation logic
+   b)Client depends on abstraction
+   c)Easy to add new types
+   d)Cleaner & scalable
+
+====================================================================================================
+1)When SHOULD You Use Factory Pattern?
+
+Use Factory when ANY of these are true 
+
+you see new scattered everywhere
+Object type depends on runtime input
+You want to hide implementation details
+You expect new types in future
+You want to follow DIP + OCP
+
+2)
+MOST IMPORTANT PART
+How to THINK: “This is Factory Pattern problem”
+Whenever you see a problem, ask these questions:
+Problem Thinking Checklist
+
+1) Are there multiple related classes?
+(Car, Bike, Truck)
+
+2) Does client only care about behavior, not type?
+(drive(), not Car or Bike)
+
+3) Is object creation decision dynamic?
+(User input, config file, API response)
+
+4) Will new types be added later?
+(New vehicle, new payment, new file type)
+
+If YES to 2 or more → Factory Pattern
