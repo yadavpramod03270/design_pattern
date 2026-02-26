@@ -1,0 +1,243 @@
+//=================================================Singleton  Design Pattern================================================
+1)"Singleton ensures that a class has only one instance and provides a global access point to it."
+"“Logger is a classic Singleton because logging requires a single shared resource to maintain ordering, consistency, and thread safety across the application.”"
+
+2)Example::
+Brain of a Company (CEO):
+Company has one CEO
+Everyone talks to the same CEO
+You don’t create a new CEO every time
+
+3)Why Singleton Exists (What Problem It Solves)
+Use Singleton when:
+Only one instance makes sense
+Shared state is required
+Central coordination is needed
+
+Examples:
+Logger
+Configuration manager
+Thread pool
+Cache
+Database connection pool manager
+
+
+4)Best & Modern C++ Way (Meyers Singleton)
+class Singleton {
+private:
+    Singleton() {}
+
+public:
+    static Singleton& getInstance() {
+        static Singleton instance; // thread-safe since C++11
+        return instance;
+    }
+
+    Singleton(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+};
+Thread safe
+Lazy initialization
+
+
+5)Why static Local Variable is Thread Safe?
+Since C++11, the standard guarantees:
+Initialization happens once
+Multiple threads wait
+No race condition
+
+6)Preventing Multiple Instances (Very Important)
+
+You must:
+Singleton(const Singleton&) = delete;
+Singleton& operator=(const Singleton&) = delete;
+
+7)How to THINK: “This is Singleton Problem”
+Ask yourself:
+
+Does system need exactly one instance?
+Is shared access required?
+Would multiple instances cause inconsistency?
+Does lifecycle need control?
+If YES → Singleton
+
+8)Real-World Analogy: Logger
+Newspaper Printing Press
+There is one printing press
+Everyone sends news to the same press
+You don’t create a new press per reporter
+Order and consistency matter
+If every reporter had their own press:
+Logs get mixed
+Files get corrupted
+Timestamps out of order
+That’s exactly why Logger must be Singleton.
+============================================================================================================
+//“A printing press must be unique because multiple presses printing to the same newspaper would cause inconsistency and ordering issues. 
+//Singleton ensures controlled access and a single coordination point.”
+//================================================= Meyers Singleton=================================================
+
+//"Meyers Singleton is a thread-safe, lazy-initialized Singleton implementation in C++ using a function-local static variable.""
+
+//The one-line definition:
+//"Meyers Singleton uses a function-local static object to ensure lazy initialization and thread safety guaranteed by the C++11 standard."
+
+#include <iostream>
+using namespace std;
+
+class Logger {
+public:
+    static Logger& getInstance() { //We want to access the Logger without creating an object ,This is the global access point of Singleton
+    //“Here static ensures the Logger object has static lifetime—created only once, 
+       //reused across calls, and safely initialized—making it ideal for implementing Singleton.”
+        static Logger logger;
+       /* MOST IMPORTANT LINE (Meyers Singleton)
+       static -> ensures only one object
+       Function-local static -> lazy initialization
+       Created only when getInstance() is first called
+        Since C++11 → thread-safe by language guarantee*/
+        return logger;
+    }
+
+    void log(const string& msg) {
+        cout << "[LOG] " << msg << endl;
+    }
+
+    Logger(const Logger&) = delete; //No copying allowed,Enforce single instance strictly
+    Logger& operator=(const Logger&) = delete; //Copy assignment deleted,
+
+private:
+    Logger() {}
+};
+
+// int main() {
+//     Logger::getInstance().log("Application started");
+//     Logger::getInstance().log("User logged in");
+// }
+
+/*
+“static gives the object static lifetime, meaning it’s created once, retains its state across calls, and is destroyed at program termination.”
+*/
+/*
+First call → create instance
+Later calls → reuse same instance
+Thread-safe → guaranteed by C++ standard
+
+*/
+
+/*Before C++11-->Local static initialization was not guaranteed to be thread-safe
+
+Since C++11 :The standard guarantees:
+Initialization of function-local static variables is thread-safe
+
+So:
+Only one thread initializes instance
+Others wait
+No race condition
+
+Why is it LAZY?
+Because:
+static Singleton instance;
+This line runs only when getInstance() is called — not at program start.
+No call → no object → memory saved.
+
+Why is this better than classic Singleton?
+Old-school Singleton-->
+Singleton* Singleton::instance = new Singleton();
+
+
+Problems:
+Initialized at program start
+Static initialization order fiasco
+Manual memory management
+Thread-safety issues
+
+Lifetime & destruction (important)
+Destroyed automatically at program shutdown
+Reverse order of creation
+No memory leak
+
+BUT ️=Order of destruction between different singletons is still tricky.
+
+“Meyers Singleton is the safest and simplest Singleton in modern C++ 
+because C++11 guarantees thread-safe initialization of function-local statics.”
+
+
+//------------------------- same Logger, but WITHOUT Meyers Singleton-----------------------------------------
+#include <iostream> 
+using namespace std;
+
+// ------------------ Logger class ------------------
+class Logger {
+
+private:
+    static Logger* instance;     
+    // Static pointer to hold the SINGLE instance of Logger
+    // Static because it must belong to the class, not objects
+    // Requirement: only one shared instance across program
+
+    Logger() {                   
+        // Private constructor
+        // Prevents object creation using: Logger obj;
+        // Requirement: control object creation
+        cout << "Logger initialized\n";
+    }
+
+    // Disable copy constructor
+    Logger(const Logger&) = delete;
+    // Requirement: prevent copying the singleton object
+
+    // Disable assignment operator
+    Logger& operator=(const Logger&) = delete;
+    // Requirement: prevent reassigning singleton object
+
+public:
+    static Logger* getInstance() {
+        // Static method so it can be called without object
+        // Requirement: global access point
+
+        if (instance == nullptr) {       
+            // Check if instance already exists
+            // Requirement: lazy initialization (create only when needed)
+
+            instance = new Logger();     
+            // Create the single Logger object
+        }
+
+        return instance;                 
+        // Return the same instance every time
+    }
+
+    void log(const string& msg) {
+       
+        cout << "[LOG] " << msg << endl;
+    }
+};
+
+// ------------------ Static member definition ------------------
+Logger* Logger::instance = nullptr;
+// Memory allocated for static pointer
+// Required because static members must be defined outside class
+
+// ------------------ Client code ------------------
+int main() {
+
+    Logger* logger1 = Logger::getInstance();
+    // Access singleton instance
+
+    logger1->log("Application started");
+
+    Logger* logger2 = Logger::getInstance();
+    // Request instance again
+
+    logger2->log("Application running");
+
+    // Both pointers point to SAME object
+    cout << (logger1 == logger2) << endl;  // prints 1 (true)
+
+    return 0;
+}
+
+
+
+
