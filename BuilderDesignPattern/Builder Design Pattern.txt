@@ -1,0 +1,35 @@
+//=================================================Builder Design Pattern===============================================================
+
+1)Real world Analogy Example:
+Ordering a Burger at McDonald’s
+You don’t say:
+“Give me bun=true, patty=true, cheese=false, lettuce=true…”
+
+You say:
+Choose bun
+Add patty
+Add cheese (optional)
+Add sauces
+Step-by-step.
+Same burger process → different burgers.
+That is Builder.
+
+2)Structure of Builder Pattern
+   4 Main Roles::
+   ---------------
+  Product – The object being built
+  Builder interface – Steps to build
+  Concrete Builder – Implements steps
+  Director (optional) – Controls order
+
+===============================================================================================
+When SHOULD You Use Builder?
+
+Use Builder when:
+
+Object has many optional fields
+Construction must follow specific steps
+You want immutability
+Telescoping constructors appear
+Same steps create different versions
+
