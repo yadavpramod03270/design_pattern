@@ -1,0 +1,68 @@
+//===============================Bridge Design Pattern===================
+/*
+1)Bridge means keeping two changing parts separate and connecting them using a pointer/reference.
+2)Bridge pattern avoids too many classes by separating two changing parts and connecting them with composition.
+3)class Phone {
+    Charger* charger;   // ← bridge connection
+}
+Means:
+“Phone and Charger live in separate worlds,
+but this pointer allows them to talk.” 
+-->and without pointer object it would be tightly coupled
+-->Charger* charger;
+    #can point to:
+    #Runtime flexibility 
+    #No class explosion
+    #Clean separation
+
+4)In Bridge pattern, the bridge is the reference from abstraction to implementation.
+5)Abstraction → Phone
+  Implementation → Charger
+  Bridge → Charger* charger
+  
+6)Bridge is used ONLY when:
+
+There are TWO THINGS that can change independently
+AND you want to avoid creating many combined classes.
+
+7)Bridge:: 3 conditions must be true-->
+condition 1: Two independent dimensions
+Example:
+Phone type
+Charger type
+Both can grow independently.
+
+Condition 2: Each dimension has its own interface-->
+Example:
+class Phone { ... }
+class Charger { ... }
+both usually have interfaces / base classes.
+
+Condition 3: ONE side “uses” the other via a pointer/reference-->
+Example:
+class Phone {
+    Charger* charger;   // bridge
+};
+This connection is intentional, not accidental.
+
+8)Corrected & precise version 
+-------------------------------
+"When there are two independent hierarchies that can grow separately, one hierarchy holds a pointer/reference to the other to connect them — this is Bridge."
+
+#Why BOTH Having Interfaces Matters
+Because:
+
+You want to add new Phones --->without touching Chargers
+You want to add new Chargers --->Without touching Phones
+Interfaces make that possible.
+
+9)Pointer means not a bridge ...also thing about posibility like ---->
+Car is not meant to vary independently from Engine : No class explosion problem
+
+10)Quick Recap:
+Composition → “has-a”
+Strategy → swap behavior
+Adapter → fix mismatch
+Bridge → separate two growing hierarchies
+
+*/
