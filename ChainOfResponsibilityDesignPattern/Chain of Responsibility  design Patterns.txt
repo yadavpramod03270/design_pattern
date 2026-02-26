@@ -1,0 +1,33 @@
+//=======================================================Chain of Responsibility  design Patterns =======================================================
+/*
+1)Chain of Responsibility lets multiple objects handle a request, passing it along a chain until one handles it.
+“I can handle this? No? Pass it to the next.”
+
+2)Client sends request once
+  Handlers decide:
+  handle it
+  or forward it
+  Client is decoupled from handling logic.
+Each handler has: A reference to the next handler
+
+3)When SHOULD you think of CoR?
+Ask yourself ->
+Use CoR if:
+More than one object can handle a request
+Order of handling matters
+You don’t want big if-else
+Client shouldn’t know who handles request
+
+4)How to RECOGNIZE CoR in code
+Keywords:
+“Pass request”
+“Forward to next”
+“If I can’t handle, someone else will”
+“Approval / Validation / Middleware / Filters”
+
+5)
+Chain of Responsibility is a behavioral design pattern that lets you pass requests along a chain of handlers. 
+Upon receiving a request, each handler decides either to process the request or to pass it to the next handler in the chain.
+
+
+*/
