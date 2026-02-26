@@ -1,0 +1,103 @@
+//========================Composite Design Pattern===============================
+We define behavior at the individual level, and the composite simply applies that behavior to all its children.
+If your structure is hierarchical and you want to treat one object and many objects the same way, use Composite.
+Composite is like a tree.
+
+Leaves → individual objects (single employee, single file, single ball)
+Composite nodes → containers (department, folder, over)
+Both share the same interface
+You call the same method on both
+The composite forwards the call to its children
+That’s it. That’s the whole idea.
+
+How to think about Composite (step-by-step)
+Start from the end individual thing
+
+Ask yourself:
+“What is the smallest unit in my system?”
+Examples:
+Employee
+File
+Ball
+Menu item
+This becomes your Leaf.
+
+You define methods for this individual object:
+getSalary()
+showDetails()
+render()
+getSize()
+
+2)Create a common interface
+You ask:
+“Do I want to treat a group and a single object the same?”
+If yes → Composite.
+
+class Component {
+public:
+    virtual void operation() = 0;
+};
+
+Both leaf and composite implement this.
+3) Create the Composite
+
+Now ask:
+“What groups these individuals together?”
+Examples:
+
+Department groups employees
+Folder groups files
+Over groups balls
+
+The composite:
+implements the same interface
+contains a collection of that interface
+vector<Component*> children;
+
+
+=============================================================================================================
+The 4 essential ingredients (non-negotiable)
+1. Component (interface / abstract class)
+--Defines common behavior
+
+Client depends ONLY on this:
+
+class Component {
+public:
+    virtual void operation() = 0;
+};
+
+2. Leaf:The smallest unit, Does real work,No children.
+
+class Leaf : public Component {
+    void operation() override {
+        // real work
+    }
+};
+
+3. Composite
+
+Contains children of the same Component type
+Delegates work recursively
+class Composite : public Component {
+    vector<Component*> children;
+
+    void operation() override {
+        for (auto c : children)
+            c->operation();
+    }
+};
+This recursive call is the soul of Composite.
+
+4. Client
+Uses Component
+Never checks leaf vs composite
+Component* obj = ...;
+obj->operation();
+
+4)The GOLDEN RULE:
+Composite contains objects of its own base type.
+If you don’t see this:
+vector<Component*>
+it’s not Composite.
+=======================================================================================================================================
