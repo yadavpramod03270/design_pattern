@@ -1,0 +1,61 @@
+//=======================================================Strategy design Patterns =====================================================================
+/*
+1)"Strategy Pattern lets you choose an algorithm at runtime without changing the object that uses it."
+"Same work, different ways — interchangeable at runtime."
+
+2)Real-world analogy:
+Google Maps Route Selection
+Same goal-> go from A to B
+Different strategies:
+Fastest route
+Shortest route
+Avoid tolls
+You don’t change Google Maps.
+You just switch the strategy.
+That’s Strategy Pattern.
+
+3)Core idea (very important)
+
+Separate WHAT to do from HOW to do it.
+Context -> what to do
+Strategy -> how to do it
+
+4)Use Strategy if:
+You have multiple algorithms for the same task
+You don’t want big if-else or switch
+Algorithm can change at runtime
+You want to follow Open/Closed Principle
+If these sound familiar -> Strategy.
+
+5)How to IDENTIFY Strategy in a problem
+Keywords in problem statement:
+ “Different ways to…”
+ “Select algorithm at runtime”
+ “Pluggable behavior”
+ “Configurable behavior”
+ “Avoid if-else for behavior”
+ 
+6)Context  --->  Strategy (interface)
+                 ↑
+          ConcreteStrategyA
+          ConcreteStrategyB
+          
+7)Where Strategy is used in REAL systems
+  Payment gateways
+  Sorting algorithms (std::sort + comparator)
+  Compression algorithms
+  Encryption algorithms
+  Route planning
+  Validation rules          
+
+
+8)WHY is this if–else here?
+|
+|-- Different ways to DO same task? -> STRATEGY
+|-- Interface mismatch? -> ADAPTER
+|-- Want control (lazy, auth, logging)? -> PROXY
+|-- Subsystem is too complex? -> FACADE
+|-- High-level depends on low-level? -> DIP
+|-- Need to add new behavior without change? -> OCP
+
+*/
