@@ -1,0 +1,77 @@
+//=======================================================Observer design Pattern==========================================================
+//Also known as: Event-Subscriber, Listener
+/*
+
+"Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing"
+
+1)Observer Pattern means:
+"When one thing changes, many other things automatically get informed."
+
+2)YouTube Example 
+Characters in the story:
+YouTube Channel -> Subject
+Subscribers -> Observers
+New video uploaded -> State change
+Notification -> Update
+
+3)
+What happens in real life?
+You subscribe to a channel
+Channel uploads a video
+You automatically get notified
+If you unsubscribe, no notification
+
+Channel doesn't call you personally
+Subscribers don't keep checking again and again
+This automatic notification system = Observer Pattern
+
+4)
+How to decide: "Should I use Observer Pattern?"
+Ask yourself only these 2 questions 
+
+Question 1:
+Do many objects need to react when one object changes?
+
+Question 2:
+Do I want to avoid tight coupling?
+If YES + YES → use Observer Pattern
+
+5)
+
+"If parent and children share the same interface -> Composite
+If parent notifies children -> Observer"
+
+6)
+"At first glance it looks similar to Composite because of the collection,
+but the intent is notification on state change. Since A is not a B and it notifies dependents, this is Observer Pattern."
+
+7)
+Composite = structure problem
+Observer = communication problem
+*/
+====================================================================================
+The Observer pattern suggests that you add a subscription mechanism to the publisher class
+so individual objects can subscribe to or unsubscribe from a stream of events coming from that publisher. 
+
+this mechanism consists of-> 
+1) an array field for storing a list of references to subscriber objects .
+2) several public methods which allow adding subscribers to and removing them from that list.
+
+Now, whenever an important event happens to the publisher, 
+it goes over its subscribers and calls the specific notification method on their objects.
+
+The publisher maintains a list of subscribers and knows which magazines they’re interested in. 
+Subscribers can leave the list at any time when they wish to stop the publisher sending new magazine issues to them.
+
+
+Application:
+Use the pattern when some objects in your app must observe others, but only for a limited time or in specific cases
+The subscription list is dynamic, so subscribers can join or leave the list whenever they need to.
+
+
+“Creating a Subject interface is good when multiple subjects or loose coupling is required. 
+For a single concrete subject, it’s acceptable to skip it to avoid overengineering.”
+
+Observer interface is mandatory
+Subject interface is optional and context-driven
+
