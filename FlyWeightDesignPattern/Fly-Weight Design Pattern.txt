@@ -1,0 +1,54 @@
+//===============================Fly-Weight Design Pattern===================
+/*
+Main:---->A flyweight pattern is a structural design pattern used to optimize memory usage and performance 
+When dealing with a large number of objects that share some common characteristics.
+
+
+1)Use the Flyweight pattern only when your program must support a huge number of objects which barely fit into available RAM.
+The benefit of applying the pattern depends heavily on how and where it’s used. It’s most useful when:
+
+2)an application needs to spawn a huge number of similar objects
+this drains all available RAM on a target device
+the objects contain duplicate states which can be extracted and shared between multiple objects
+
+
+3)How to Implement
+Divide fields of a class that will become a flyweight into two parts:
+
+4)the intrinsic state: the fields that contain unchanging data duplicated across many objects
+5)the extrinsic state: the fields that contain contextual data unique to each object
+6)How to Implement
+Divide fields of a class that will become a flyweight into two parts:
+
+the intrinsic state: the fields that contain unchanging data duplicated across many objects
+the extrinsic state: the fields that contain contextual data unique to each object
+
+
+7)The simplest possible definition
+Intrinsic State:
+Data that is SAME for many objects → stored INSIDE the object → shared
+
+Extrinsic State:
+Data that is DIFFERENT for each object → passed from OUTSIDE → not stored
+That’s it. Nothing more.
+
+8) Real-life example :
+Pizza shop 
+Intrinsic (shared)::
+Dough recipe
+Sauce recipe
+Oven temperature
+
+Same for hundreds of pizzas
+Extrinsic (unique)
+Table number
+Customer name
+ Different for each order
+*/
+//=====================================================================
+// Problem first (why Flyweight?)
+// Classroom has 500 chairs
+// All chairs have same design, color, material
+// Only seat number / student changes
+// Without Flyweight ->500 identical chair objects
+// With Flyweight -> 1 shared chair design, reused 500 times
